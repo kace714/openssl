@@ -250,6 +250,22 @@ func (c *Certificate) SetExpireDate(when time.Duration) error {
 	return nil
 }
 
+func (c *Certificate) GetNotBefore() error {
+	result := C.X_X509_get0_notBefore(c.x)
+	if result == nil {
+		return errors.New("failed to get not before")
+	}
+	return nil
+}
+
+func (c *Certificate) GetNotAfter() error {
+	result := C.X_X509_get0_notAfter(c.x)
+	if result == nil {
+		return errors.New("failed to get not after")
+	}
+	return nil
+}
+
 // SetPubKey assigns a new public key to a certificate.
 func (c *Certificate) SetPubKey(pubKey PublicKey) error {
 	c.pubKey = pubKey
